@@ -1,0 +1,50 @@
+body {
+    color: darkgray;
+    min-height: 100%;
+    display: flex;
+    flex-direction: column;
+}
+
+.headercointainer {
+    background-color: yellow;
+}
+
+.main {
+    width: 100%;
+    height: 100%;
+}
+
+
+.carousel-inner {
+    display: grid;
+    place-content: center;
+    size: 450px 320px;
+}
+
+
+.d-block {
+    display: block;
+    margin: auto;
+    
+}
+
+.carousel-caption {
+    background-color: gray;
+    opacity: 70%;
+}
+
+.carousel-color {
+    color: green;
+    font-weight: bold;
+    
+}
+
+
+
+
+.footer {
+    position: fixed;
+    bottom: 0px;
+    width: 100%;
+}
+
