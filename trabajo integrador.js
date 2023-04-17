@@ -1,9 +1,19 @@
 
 /*JS del resumen*/
- 
-function mostrarResumen(){
-  var nombrereseña = document.getElementById("nombrer").value;
-  var textoreseña = document.getElementById("reseñar").value;
+
+function mostrarResumen() {
+  var nombrereseña = document.getElementById("nombrer").value.trim();
+  var textoreseña = document.getElementById("reseñar").value.trim();
+
+  if (nombrereseña === '') {
+    alert('El nombre no puede estar vacío');
+    return;
+  }
+
+  if (textoreseña === '') {
+    alert('La reseña no puede estar vacía');
+    return;
+  }
 
   var nombreResumen = document.getElementById("nombre-resumen");
   var resenaResumen = document.getElementById("resena-resumen");
@@ -22,30 +32,38 @@ function mostrarResumen(){
 
 }
 
-
-
 /*JS exportación a PDF*/
-
-function exportarPDF (){
+function exportarPDF() {
   var element = document.getElementById('resumen');
   var opt = {
-  margin:       [50,50],
-  filename:     'resena.pdf',
-  jsPDF:        { unit: 'mm', format: 'a4'}
-};
+    margin: [50, 50],
+    filename: 'resena.pdf',
+    jsPDF: { unit: 'mm', format: 'a4' },
+    html2canvas: {
+      ignoreElements: function (element) {
+        if (element.classList.contains("no-export")) {
+          return true;
+        }
+        return false;
+      }
+    },
+    jsPDF: {
+      format: 'a4',
+      orientation: 'portrait',
+      unit: 'mm'
+    }
+  };
 
-html2pdf().set(opt).from(element).save();
+  html2pdf().set(opt).from(element).save();
 }
-
-
 
 /*JS consumo de la API externa*/
 
-async function representanteUno(){
+async function representanteUno() {
   const representante = await fetch("https://reqres.in/api/users/2"); //Consumo
   const datoJSON = await representante.json(); //Paso los datos a json
 
-  
+
   var nombreRep = document.getElementById('nombre-representante');
   var emailRep = document.getElementById('email-representante');
 
@@ -59,3 +77,5 @@ async function representanteUno(){
   var sectionAvatar = document.getElementById("representante-avatar");
   sectionAvatar.appendChild(avatar); //Agrego la imagen al div
 }
+
+
